@@ -10,7 +10,7 @@ body {
     font-family: "Noto Sans JP", sans-serif;
 }
 
-.container {
+.container, .container-subtitle {
     display: flex;
     position: relative;
     z-index: 0;
@@ -23,6 +23,10 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-height: 90vh;
     margin: 5px;
+}
+
+.container-subtitle{
+    display: none;
 }
 
 #subtitleContainer {

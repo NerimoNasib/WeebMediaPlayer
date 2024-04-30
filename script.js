@@ -101,6 +101,9 @@ function selectedSubtitle(subInput) {
 
       video.load();
       video.play();
+
+      var subtitleContainer = document.getElementsByClassName("container-subtitle")[0];
+      subtitleContainer.style.display = "block";
   };
 
   subtitleReader.readAsText(subtitleFile, 'UTF-8');
@@ -141,14 +144,18 @@ function displaySubtitles(subtitles) {
   subtitleContainer.innerHTML = "";
 
   for (var i = 0; i < subtitles.length; i++) {
-    var cue = subtitles[i];
-    var subtitleLines = cue.text.split("<br>");
-    for (var j = 0; j < subtitleLines.length; j++) {
-      var subtitleElement = document.createElement("p");
-      subtitleElement.className = "subtitle";
-      subtitleElement.innerHTML = subtitleLines[j];
-      subtitleContainer.appendChild(subtitleElement);
-    }
+      var cue = subtitles[i];
+      var subtitleLines = cue.text.split("<br>");
+
+      for (var j = 0; j < subtitleLines.length; j++) {
+          var subtitleText = subtitleLines[j];
+          if (!/^WEBVTT|^Kind:|^Language:/.test(subtitleText)) {
+              var subtitleElement = document.createElement("p");
+              subtitleElement.className = "subtitle";
+              subtitleElement.innerHTML = subtitleText;
+              subtitleContainer.appendChild(subtitleElement);
+          }
+      }
   }
 }
 
