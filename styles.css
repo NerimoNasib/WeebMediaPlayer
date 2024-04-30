@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #f0f0f0, #dcdcdc);
+    transition: background 0.3s ease;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    z-index: 0;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 90vh;
+    margin: 5px;
+}
+
+#subtitleContainer {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 80vh;
+    max-width: 30vh;
+}
+
+#subtitleContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+#video {
+    max-width: 100%;
+    z-index: 2;
+    max-height: 65vh;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.4;
+}
+
+
+.figure{
+    margin-top: 0;
+    padding: 0;
+    font-size: 0.875em;
+}
+
+
+.file-upload{
+    display: inline-block;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+}
+
+.custom-file-button {
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: 800;
+    line-height:0.75em;
+    font-size:0.75em;
+    width:50px;
+    height:20px;
+    outline: 0;
+    padding: 1em 1.2em;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.custom-file-button:hover {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742;
+    transition: 0.2s;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#toggleDark{
+    color: #333;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 0.75em;
+    line-height: 1.5;
+    color: #333;
+    border-bottom: 3px dotted rgb(189, 189, 189);
+}

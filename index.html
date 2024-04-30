@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weeb Video Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <video id="video" controls>
+            <track id="track" default />
+        </video>
+        <canvas width="10" height="6" aria-hidden="true" class="canvas" id="js-canvas"></canvas>
+        <div class="file-upload">
+            <div class="custom-file-upload">
+                <label for="videoInput" class="custom-file-button">Upload Video</label>
+                <input type="file" id="videoInput" name="videoFile" accept="video/*" onchange="selectedVideo(this);" hidden>
+            </div>
+            <div class="custom-file-upload">
+                <label for="subInput" class="custom-file-button">Upload Subtitle</label>
+                <input type="file" id="subInput" name="subtitleFile" accept=".vtt,.srt" onchange="selectedSubtitle(this);" hidden>
+            </div>
+        </div>
+        <div class="figure">
+            <p>Dark mode: <span id="toggleDark">Off</span></p>
+        </div>
+    </div>
+    <div class="container">
+        <div id="subtitleContainer">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
