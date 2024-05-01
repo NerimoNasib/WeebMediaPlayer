@@ -28,6 +28,7 @@ body {
 
 .container-subtitle{
     display: none;
+    background-color: rgb(251, 251, 251);
 }
 
 
@@ -130,11 +131,20 @@ input[type="file"] {
     font-weight: 700;
 }
 
-.subtitle {
+.caption {
     margin: 0;
     padding: 5px 0;
-    font-size: 0.75em;
+    font-size: 1em;
     line-height: 1.5;
     color: #333;
-    border-bottom: 3px dotted rgb(189, 189, 189);
+}
+
+.caption:hover{
+    cursor: pointer;
+}
+
+.caption.highlight {
+    font-weight: bold;
+    color: black;
+    text-shadow: 2px 2px #ffffff;
 }

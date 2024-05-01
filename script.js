@@ -145,24 +145,74 @@ function parseSubtitles(subtitleSrc) {
 function displaySubtitles(subtitles) {
   var subtitleContainer = document.getElementById("subtitleContainer");
   subtitleContainer.innerHTML = "";
+  var videoPlayer = document.getElementById("video");
 
   for (var i = 0; i < subtitles.length; i++) {
       var cue = subtitles[i];
-      var subtitleLines = cue.text.split("<br>");
+      var startTime = cue.startTime;
+      var endTime = cue.endTime;
+      var startSeconds = convertTimestampToSeconds(startTime);
+      var endSeconds = convertTimestampToSeconds(endTime);
 
+      var span = document.createElement("span");
+      span.setAttribute("data-caption-id", "id_" + i);
+      span.classList.add("caption", "button", "active");
+      span.setAttribute("data-start", startSeconds.toFixed(3));
+      span.setAttribute("data-end", endSeconds.toFixed(3));
+      var captionText = document.createElement("span");
+      captionText.id = "id_" + i;
+      captionText.setAttribute("data-caption-id", "id_" + i);
+      captionText.classList.add("caption-text");
+      var subtitleLines = cue.text.split("<br>");
       for (var j = 0; j < subtitleLines.length; j++) {
-          var subtitleText = subtitleLines[j];
-          if (!/^WEBVTT|^Kind:|^Language:/.test(subtitleText)) {
-              var subtitleElement = document.createElement("p");
-              subtitleElement.className = "subtitle";
-              subtitleElement.innerHTML = subtitleText;
-              subtitleContainer.appendChild(subtitleElement);
-          }
+          var p = document.createElement("p");
+          p.textContent = subtitleLines[j];
+          captionText.appendChild(p);
       }
+
+      span.appendChild(captionText);
+      subtitleContainer.appendChild(span);
+
+      span.addEventListener("click", function() {
+          var startTime = parseFloat(this.getAttribute("data-start"));
+          videoPlayer.currentTime = startTime;
+      });
   }
+
+  videoPlayer.addEventListener("timeupdate", function() {
+    var currentTime = videoPlayer.currentTime;
+    var subtitleSpans = subtitleContainer.querySelectorAll("span[data-start]");
+    for (var i = 0; i < subtitleSpans.length; i++) {
+        var startSeconds = parseFloat(subtitleSpans[i].getAttribute("data-start"));
+        var endSeconds = parseFloat(subtitleSpans[i].getAttribute("data-end"));
+        if (currentTime >= startSeconds && currentTime <= endSeconds) {
+            subtitleSpans[i].classList.add("highlight");
+            console.log("Subtitle with ID " + subtitleSpans[i].getAttribute("data-caption-id") + " is highlighted.");
+            var subtitleRect = subtitleSpans[i].getBoundingClientRect();
+            var containerRect = subtitleContainer.getBoundingClientRect();
+            if (subtitleRect.bottom > containerRect.bottom) {
+                subtitleContainer.scrollTop += subtitleRect.bottom - containerRect.bottom;
+            }
+        } else {
+            subtitleSpans[i].classList.remove("highlight");
+        }
+    }
+});
+
+
+
 }
 
-//test
+function convertTimestampToSeconds(timestamp) {
+  if (!timestamp) return 0;
+  var parts = timestamp.split(/[,.:]/);
+  if (parts.length < 4) return 0;
+  var hours = parseInt(parts[0]);
+  var minutes = parseInt(parts[1]);
+  var seconds = parseInt(parts[2]);
+  var milliseconds = parseInt(parts[3]);
+  return hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
+}
 
 function srt2webvtt(data) {
   var srt = data.replace(/\r+/g, '');
@@ -213,6 +263,7 @@ function convertSrtCue(caption) {
   return cue;
 }
 
+//Dark theme switches
 const toggle = document.getElementById('toggleDark');
 const videoInput = document.getElementById('videoInput');
 const body = document.querySelector('body');
