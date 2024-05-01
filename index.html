@@ -11,17 +11,18 @@
 </head>
 <body>
     <div class="container">
+        <div id="video-header"><h2></h2></div>
         <video id="video" controls>
             <track id="track" default />
         </video>
         <canvas width="10" height="6" aria-hidden="true" class="canvas" id="js-canvas"></canvas>
         <div class="file-upload">
             <div class="custom-file-upload">
-                <label for="videoInput" class="custom-file-button">Upload Video</label>
+                <label for="videoInput" class="custom-file-button">Load Video</label>
                 <input type="file" id="videoInput" name="videoFile" accept="video/*" onchange="selectedVideo(this);" hidden>
             </div>
             <div class="custom-file-upload">
-                <label for="subInput" class="custom-file-button">Upload Subtitle</label>
+                <label for="subInput" class="custom-file-button">Load Subtitle</label>
                 <input type="file" id="subInput" name="subtitleFile" accept=".vtt,.srt" onchange="selectedSubtitle(this);" hidden>
             </div>
         </div>

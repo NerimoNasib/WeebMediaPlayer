@@ -32,7 +32,7 @@ class VideoWithBackground {
   
     init = () => {
       this.ctx = this.jscanvas.getContext("2d");
-      this.ctx.filter = "blur(1px)";
+      this.ctx.filter = "blur(2px)";
   
       this.jsvideo.addEventListener("loadeddata", this.draw, false);
       this.jsvideo.addEventListener("seeked", this.draw, false);
@@ -51,7 +51,7 @@ class VideoWithBackground {
 }
   
 const el = new VideoWithBackground("video", "js-canvas");
-  
+
 
 function selectedVideo(self) {
     var file = self.files[0];
@@ -63,6 +63,9 @@ function selectedVideo(self) {
         video.src = src;
         video.load();
         video.play();
+        video.style.display = "block";
+        var filenameWithoutExtension = file.name.split('.').slice(0, -1).join('.');
+        document.getElementById("video-header").getElementsByTagName("h2")[0].textContent = filenameWithoutExtension;
     };
 
     reader.readAsDataURL(file);
@@ -216,6 +219,7 @@ const body = document.querySelector('body');
 const container = document.querySelector('.container'); 
 const figure = document.querySelector('.figure');
 const kyanvas = document.querySelector('.canvas')
+const header = document.getElementById('video-header');
 
 toggle.addEventListener('click', function() {
     if (toggle.textContent === 'Off') {
@@ -225,6 +229,7 @@ toggle.addEventListener('click', function() {
         toggle.style.color = "red";
         toggle.textContent = 'On';
         kyanvas.style.opacity = '0.2';
+        header.style.color = 'white';
     } 
 
     else {
@@ -234,5 +239,6 @@ toggle.addEventListener('click', function() {
         toggle.style.removeProperty('color');
         kyanvas.style.removeProperty('opacity');
         toggle.textContent = 'Off';
+        header.style.removeProperty('color');
     }
 });

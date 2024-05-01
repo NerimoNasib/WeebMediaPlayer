@@ -18,6 +18,7 @@ body {
     align-items: center;
     background-color: #ffffff;
     padding: 20px;
+    padding-top: 5px;
     border-radius: 10px;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -27,6 +28,14 @@ body {
 
 .container-subtitle{
     display: none;
+}
+
+
+#video-header{
+    margin: 0px;
+    padding: 0px;
+    color: #333;
+    font-size: 0.75em;
 }
 
 #subtitleContainer {
@@ -47,6 +56,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    display: none;
 }
 
 .canvas {
