@@ -62,7 +62,6 @@ function selectedVideo(self) {
         var video = document.getElementById("video");
         video.src = src;
         video.load();
-        video.play();
         video.style.display = "block";
         var filenameWithoutExtension = file.name.split('.').slice(0, -1).join('.');
         document.getElementById("video-header").getElementsByTagName("h2")[0].textContent = filenameWithoutExtension;
@@ -83,7 +82,8 @@ function selectedSubtitle(subInput) {
 
       if (subtitleFile.name.endsWith(".srt")) {
           subtitleSrc = srt2webvtt(subtitleData);
-      } else {
+      }
+      else {
           subtitleSrc = subtitleData;
       }
 
@@ -124,16 +124,20 @@ function parseSubtitles(subtitleSrc) {
               cues.push(cue);
               cue = {};
           }
-      } else if (/^\d+$/.test(lines[i])) {
+      } 
+      else if (/^\d+$/.test(lines[i])) {
           cue.index = parseInt(lines[i]);
-      } else if (/^\d+:\d+:\d+/.test(lines[i])) {
+      }
+      else if (/^\d+:\d+:\d+/.test(lines[i])) {
           var times = lines[i].split(" --> ");
           cue.startTime = times[0];
           cue.endTime = times[1];
-      } else {
+      }
+      else {
           if (!cue.text) {
               cue.text = lines[i];
-          } else {
+          }
+          else {
               cue.text += "<br>" + lines[i];
           }
       }
@@ -187,13 +191,14 @@ function displaySubtitles(subtitles) {
         var endSeconds = parseFloat(subtitleSpans[i].getAttribute("data-end"));
         if (currentTime >= startSeconds && currentTime <= endSeconds) {
             subtitleSpans[i].classList.add("highlight");
-            console.log("Subtitle with ID " + subtitleSpans[i].getAttribute("data-caption-id") + " is highlighted.");
+            // console.log("Subtitle with ID " + subtitleSpans[i].getAttribute("data-caption-id") + " is highlighted.");
             var subtitleRect = subtitleSpans[i].getBoundingClientRect();
             var containerRect = subtitleContainer.getBoundingClientRect();
             if (subtitleRect.bottom > containerRect.bottom) {
                 subtitleContainer.scrollTop += subtitleRect.bottom - containerRect.bottom;
             }
-        } else {
+        }
+        else {
             subtitleSpans[i].classList.remove("highlight");
         }
     }
