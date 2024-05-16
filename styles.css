@@ -148,3 +148,41 @@ input[type="file"] {
     color: black;
     text-shadow: 2px 2px #ffffff;
 }
+
+@media (max-width: 600px) and (orientation: portrait) {
+    body {
+        flex-direction: column;
+    }
+
+    .container {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .container-subtitle {
+        display: none;
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    #video {
+        width: 100%;
+        max-height: 50vh;
+    }
+
+    #subtitleContainer {
+        max-width: 100%;
+        max-height: 40vh;
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 412px) and (max-width: 914px) and (orientation: portrait) and (someCondition) {
+    #subtitleContainer {
+        display: flex;
+    }
+
+    .container-subtitle {
+        display: flex;
+    }
+}
